@@ -1,4 +1,4 @@
-# during
+# DOTA2 查询工具
 
 > DOTA2 ASSISTANT
 

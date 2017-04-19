@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-<router-link v-bind:to="'./hero'" class="title tit1">DOTA2出装查询</router-link>
+<router-link v-bind:to="{ name: 'Hero', params: { id: 1}}" class="title tit1">DOTA2出装查询</router-link>
  
 <router-link v-bind:to="''" class="title tit2">MAX+数据</router-link>
  

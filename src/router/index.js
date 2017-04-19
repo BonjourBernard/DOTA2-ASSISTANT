@@ -4,6 +4,8 @@ import App from '@/components/App'
 
 import Hero from '@/components/Hero'
 
+import HeroInfo from '@/components/HeroInfo'
+
 Vue.use(Router)
 
 export default new Router({
@@ -14,9 +16,14 @@ export default new Router({
       component: App
     },
     {
-      path: '/hero',
+      path: '/heros/:id',
       name: 'Hero',
       component: Hero
+    },
+    {
+      path: '/heroInfo/:heroId',
+      name: 'HeroInfo',
+      component: HeroInfo
     }
   ]
 })

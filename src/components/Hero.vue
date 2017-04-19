@@ -3,19 +3,20 @@
   <div class="hero">
   <div class="hero_top_wrap clearfix">
     <ul class="top_tab_ul clearfix">
-     <li>
-      <router-link v-bind:to="'http://www.dota2.com.cn/heroes/index.htm'" class="on">力量英雄</router-link>
+     <li v-for="heroType in heroTypes">
+      <router-link v-bind:to="heroType.link" :class="currentHeroId == heroType.id ? 'on' : ''">{{heroType.name}}英雄</router-link>
       </li>
-     <li>
-      <router-link v-bind:to="'http://www.dota2.com.cn/heroes/index.htm'" class="">敏捷英雄</router-link>
-      </li>
-     <li>
-      <router-link v-bind:to="'http://www.dota2.com.cn/heroes/index.htm'" class="">智力英雄</router-link>
-     </li>
     </ul>
    </div>
-   <div class="hero_list">
-   
+   <div class="hero_list clearfix">
+   <div class="hero_info" v-for="hero in heroList">
+   <router-link v-bind:to="hero.link">
+   <img :src="hero.imgSrc"/>
+   <div class="hero_name">
+   {{hero.name}}
+   </div>
+   </router-link>
+   </div>
    </div>
    
   </div>
@@ -24,7 +25,18 @@
 
 <script>
 export default {
-  hero_type: ['力量', '敏捷', '智力']
+  name: 'Hero',
+  computed: {
+    heroTypes () {
+      return [{name: '力量', link: './1', id: 1}, {name: '敏捷', link: './2', id: 2}, {name: '智力', link: './3', id: 3}]
+    },
+    currentHeroId () {
+      return this.$route.params.id
+    },
+    heroList () {
+      return [{name: '小小', link: '/heroInfo/1', id: 1, imgSrc: 'http://www.dota2.com.cn/images/heroes/tiny_full.png'}, {name: '昆卡', link: '/heroInfo/2', id: 2, imgSrc: 'http://www.dota2.com.cn/images/heroes/kunkka_full.png'}, {name: '兽王', link: '/heroInfo/3', id: 3, imgSrc: 'http://www.dota2.com.cn/images/heroes/beastmaster_full.png'}, {name: '伐木机', link: '/heroInfo/4', id: 4, imgSrc: 'http://www.dota2.com.cn/images/heroes/shredder_full.png'}, {name: '大地之灵', link: '/heroInfo/5', id: 5, imgSrc: 'http://www.dota2.com.cn/images/heroes/earth_spirit_full.png'}]
+    }
+  }
 }
 </script>
 
@@ -33,21 +45,31 @@ ul,li{
   margin: 0;
     padding: 0;
 }
+html{
+  background:url(http://www.dota2.com.cn/event/201401/herodata/images/bg.jpg) center top no-repeat #141516;
+}
 .home{
-  position:absolute;
+  position:relative;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:url(http://www.dota2.com.cn/event/201401/herodata/images/bg.jpg) center top no-repeat #141516;
+  
 }
 .hero{
   width:800px;
   height:auto;
-  margin:50px auto
+  margin:50px auto;
+  font-family:"微软雅黑";
 }
 .clearfix {
     zoom: 1;
+}
+.clearfix:after{
+  display:block;
+  height:0;
+  content:"";
+  clear:both;
 }
 .hero_top_wrap {
     width: 800px;
@@ -82,5 +104,40 @@ ul,li{
     background-position: 0 -42px;
     text-decoration: none;
 }
+.hero_list{
+  width:800px;
+  padding:20px 10px 0 10px;
+  background:#0f0f0f;
+}
+.hero_info{
+  float:left;
+  width:180px;
+  margin-left:20px;
+  margin-bottom:20px;
+  position:relative;
+  left:-20px;
+  cursor:pointer;
+}
 
+.hero_info img{
+  width:100%;
+}
+
+.hero_info .hero_name{
+  width:100%;
+  text-align:center;
+  color:#ddd;
+  font-size:18px;
+  line-height:30px;
+}
+.hero_info:hover .hero_name{
+
+  -webkit-animation: neon 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon 1.5s ease-in-out infinite alternate;
+  animation: neon 1.5s ease-in-out infinite alternate; 
+
+}
+.hero_info:hover img{
+      box-shadow: 0 0 10px #ff8800;
+}
 </style>

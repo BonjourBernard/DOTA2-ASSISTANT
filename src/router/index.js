@@ -6,9 +6,12 @@ import Hero from '@/components/Hero'
 
 import HeroInfo from '@/components/HeroInfo'
 
-Vue.use(Router)
+import ManageLogin from '@/components/ManageLogin'
 
-export default new Router({
+import Manager from '@/components/Manager'
+
+Vue.use(Router)
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -24,6 +27,42 @@ export default new Router({
       path: '/heroInfo/:heroId',
       name: 'HeroInfo',
       component: HeroInfo
+    },
+    {
+      path: '/manager',
+      name: 'Manager',
+      component: Manager,
+      meta: {
+        auth: true // 这里设置，当前路由需要校验
+      },
+      subRoutes: {
+        '/detail': {
+        },
+        '/edit': {
+        },
+        '/append': {
+        },
+      }
+    },
+    {
+      path: '/login',
+      name: 'ManageLogin',
+      component: ManageLogin
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(m => m.meta.auth)) {
+    let accountStorage = sessionStorage.getItem('account')
+    if (accountStorage) {
+      next();
+    } else {
+      next({
+        path: '/login?origin=' + to.fullPath
+      })
+    }
+  } else {
+    next()
+  }
+})
+export default router

@@ -6,7 +6,7 @@
   <div class="hero_en_name">
   {{heroInfo.enName}}
   </div>
-  <div class="row clearfix">
+  <div class="row hero_info clearfix">
   <div class="face">
   <img :src="heroInfo.imgSrc"/>
   </div>
@@ -50,14 +50,13 @@ export default {
   margin-left:5px;
   margin-bottom:15px;
 }
-.row{
+.hero_info{
+
   padding:15px;
   box-shadow:2px 2px 2px #222;
   background:#0f0f0f;
 }
-.row>div{
-  float:left;
-}
+
 .left_10{
   position:relative;
   left:10px;

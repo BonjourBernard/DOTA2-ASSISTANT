@@ -1,11 +1,11 @@
 <template>
   <div id="app">
 <router-link v-bind:to="{ name: 'Hero', params: { id: 1}}" class="title tit1">DOTA2出装查询</router-link>
- 
+
 <router-link v-bind:to="''" class="title tit2">MAX+数据</router-link>
- 
+
 <router-link v-bind:to="''" class="title tit3">近期比赛数据</router-link>
- 
+
   <div class="shade_bg">
 
                         <img ondragstart="return false" src="http://www.dota2.com.cn/images/cover170320/zhe.png">
@@ -15,7 +15,7 @@
                             <source src="http://dota2.dl.wanmei.com/dota2/media/monkeyking_2.mp4" type="video/mp4">
                         </video>
                     </div>
-   
+
   </div>
 </template>
 
@@ -70,12 +70,12 @@ video{
   z-index:10000;
     font-family: Audiowide;
     cursor:pointer;
-  
+
 }
 .title:hover{
   -webkit-animation: neon 1.5s ease-in-out infinite alternate;
   -moz-animation: neon 1.5s ease-in-out infinite alternate;
-  animation: neon 1.5s ease-in-out infinite alternate; 
+  animation: neon 1.5s ease-in-out infinite alternate;
 
 }
 @-webkit-keyframes neon {

@@ -1,0 +1,12 @@
+{
+  "name": "TuniuDistributeSystem",
+  "version": "0.0.1",
+  "description": "途牛分销系统",
+  "scripts": {
+    "start": "supervisor -w ../../ -e js,ejs -i ../node_modules,.public app.js"
+
+  },
+  "dependencies": {
+    "captchapng": "0.0.1"
+  }
+}

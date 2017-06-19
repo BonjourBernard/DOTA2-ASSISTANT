@@ -5,17 +5,21 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装外部库
 npm install
 
-# serve with hot reload at localhost:8080
+# 启动本地mongo数据库
+省略。。
+
+# 启动node服务
+npm start
+
+# 获取dota2官网英雄数据，导入数据库
+直接访问http://127.0.0.1:8282/spider/index就可以
+
+暂设置本地数据库端口为27017 node端口8282
+
+# 启动vue 端口8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

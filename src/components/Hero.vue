@@ -4,12 +4,12 @@
   <div class="hero_top_wrap clearfix">
     <ul class="top_tab_ul clearfix">
      <li v-for="heroType in heroTypes">
-      <router-link v-bind:to="heroType.link" :class="currentHeroId == heroType.id ? 'on' : ''">{{heroType.name}}英雄</router-link>
+      <router-link v-on:click.native='getHeroList(heroType.id)' v-bind:to="heroType.link" :class="currentHeroId == heroType.id ? 'on' : ''">{{heroType.name}}英雄</router-link>
       </li>
     </ul>
    </div>
    <div class="hero_list clearfix">
-   <div class="hero_info" v-for="hero in heroList">
+   <div class="hero_info" v-for="hero in heroList" v-if="hero.name!=null">
    <router-link v-bind:to="hero.link">
    <img :src="hero.imgSrc"/>
    <div class="hero_name">
@@ -26,17 +26,33 @@
 <script>
 export default {
   name: 'Hero',
+  data:function(){
+  return {
+        heroList:[]
+  }
+  },
+  methods:{
+  getHeroList(id){
+  this.$http.post('http://localhost:8282/heros/list',{"type":id}, {emulateJSON: true}).then((res) => {
+        this.heroList = res.data.data;
+        console.log(this.heroList);
+      });
+  }
+  },
   computed: {
     heroTypes () {
       return [{name: '力量', link: './1', id: 1}, {name: '敏捷', link: './2', id: 2}, {name: '智力', link: './3', id: 3}]
     },
     currentHeroId () {
       return this.$route.params.id
-    },
-    heroList () {
-      return [{name: '小小', link: '/heroInfo/1', id: 1, imgSrc: 'http://www.dota2.com.cn/images/heroes/tiny_full.png'}, {name: '昆卡', link: '/heroInfo/2', id: 2, imgSrc: 'http://www.dota2.com.cn/images/heroes/kunkka_full.png'}, {name: '兽王', link: '/heroInfo/3', id: 3, imgSrc: 'http://www.dota2.com.cn/images/heroes/beastmaster_full.png'}, {name: '伐木机', link: '/heroInfo/4', id: 4, imgSrc: 'http://www.dota2.com.cn/images/heroes/shredder_full.png'}, {name: '大地之灵', link: '/heroInfo/5', id: 5, imgSrc: 'http://www.dota2.com.cn/images/heroes/earth_spirit_full.png'}]
     }
-  }
+  },
+   beforeCreate() {
+      this.$http.post('http://localhost:8282/heros/list',{"type":this.$route.params.id}, {emulateJSON: true}).then((res) => {
+        this.heroList = res.data.data;
+        console.log(this.heroList);
+      });
+    },
 }
 </script>
 
@@ -83,7 +99,6 @@ html{
     float: left;
     padding-top: 69px;
     height: 42px;
-    overflow: hidden;
     }
     .top_tab_ul li {
     float: left;
@@ -111,11 +126,11 @@ html{
 }
 .hero_info{
   float:left;
-  width:180px;
+  width:175px;
   margin-left:20px;
   margin-bottom:20px;
   position:relative;
-  left:-20px;
+  left:-10px;
   cursor:pointer;
 }
 

@@ -144,6 +144,7 @@
     width:90px;
     height:60px;
     cursor:pointer;
+    margin:2px;
   }
   .yeYan,.tianHui{
     min-height:350px;
@@ -154,6 +155,7 @@
   .hero_detail:hover .hero_detail_i{
     position: absolute;
     transform: scale(2,2);
+    z-index:100000
   }
   .hero_skill{
     display:none;
